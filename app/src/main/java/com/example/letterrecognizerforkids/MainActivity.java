@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.SparseIntArray;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Stack<Character> s;
             Button btn = (Button)view;
             String actionStr = btn.getText().toString();
+            if(view.getId()  == R.id.btnclr)
+            {
+                t.setText("");
+                tf1.setText("");
+                return;
+            }
             String len = tf1.getText() + actionStr;
             //mx length of exp should be 50
             if(len.length() > 50)
@@ -51,14 +56,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(actionStr.length() == 1)
             {
                 char c = actionStr.charAt(0);
-                if(Character.isDigit(c))
-                    caseNum = "1";
-                else if(c == '.')
-                    caseNum = "2";
-                else if(c == '=')
-                    caseNum = "3";
-                else
-                    caseNum = "6";
+                int length = ((String) t.getText()).length(), i = length;
+                String str = (String) t.getText();
+                //to avoid double decimal in single number
+                while (i>0) {
+                    if (str.charAt(i - 1) == '.' && c == '.')
+                        return;
+                    if (!Character.isDigit(str.charAt(i - 1)))
+                        break;
+                    i--;
+                }
+            if(Character.isDigit(c))
+                caseNum = "1";
+            else if(c == '.')
+                caseNum = "2";
+            else if(c == '=')
+                caseNum = "3";
+            else
+                caseNum = "6";
             }
             switch(caseNum) {
                 case "1": {
@@ -70,10 +85,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     boolean b = false;
                     if (str.length() > 0)
                         b = Character.isDigit(str.charAt(str.length() - 1));
-                    if (str.length() > 0) {
-                        if (str.charAt(str.length() - 1) == '.')
-                            break;
-                    }
                     if (str == "" || !b) {
                         t.setText(((String) t.getText()).concat("0"));
                         tf1.setText(((String) tf1.getText()).concat("0"));
@@ -153,6 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     void operand(String s)
     {
         clear = clearIt(clear);
+        if(t.getText().toString().matches("0"))
+            t.setText("");
         t.setText(((String) t.getText()).concat(s));
         tf1.setText(tf1.getText()+s);
     }
@@ -229,3 +242,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
+
+
+//FIXEX TO DO
+//2-DOUBLING OF OPRTOR IN UPER FILED
