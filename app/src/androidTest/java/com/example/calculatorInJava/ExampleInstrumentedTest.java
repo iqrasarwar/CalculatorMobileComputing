@@ -1,4 +1,4 @@
-package com.example.letterrecognizerforkids;
+package com.example.calculatorInJava;
 
 import android.content.Context;
 
