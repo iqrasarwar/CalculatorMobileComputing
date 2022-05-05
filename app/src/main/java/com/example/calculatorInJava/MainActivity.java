@@ -137,7 +137,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         clear = false;
         String str1 = (String)tf1.getText();
-
+        char text = str1.charAt(str1.length()-1);
+       // if last char is decimal append zero to it before next operator
+        if (text == '.')
+        {
+            tf1.setText(tf1.getText()+"0");
+            t.setText(t.getText()+"0");
+       }
         if("".equals(t.getText()))
         {
             t.setText("0");
