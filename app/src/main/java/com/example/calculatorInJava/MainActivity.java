@@ -85,6 +85,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case "2": {
                     String str = (String) t.getText();
                     boolean b = false;
+                    //if a operator exists at last and . is entered, append 0
+                    //if 4+ exits . is pressed make it 4+0.
+//                    String str1 = (String)tf1.getText();
+//                    char text = str1.charAt(str1.length()-1);
+//                    if (!Character.isDigit(text))
+//                    {
+//                        tf1.setText(tf1.getText()+"0");
+//                        t.setText(t.getText()+"0");
+//                    }
                     if (str.length() > 0)
                         b = Character.isDigit(str.charAt(str.length() - 1));
                     if (str == "" || !b) {
@@ -144,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tf1.setText(tf1.getText()+"0");
             t.setText(t.getText()+"0");
        }
+
         if("".equals(t.getText()))
         {
             t.setText("0");
