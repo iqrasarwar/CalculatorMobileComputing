@@ -177,6 +177,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             t.setText(str.substring(0,str.length()-1));
         t.setText(solve((String)t.getText()));
         t.setText(((String) t.getText()).concat(s));
+        //resolving doubling of operator in upper field
+        String tf11 = (String)tf1.getText();
+        if (!Character.isDigit(tf11.charAt(tf11.length()-1)))
+        {
+            tf1.setText(tf11.substring(0,tf11.length()-1));
+        }
         tf1.setText(tf1.getText()+s);
     }
     void operand(String s)
